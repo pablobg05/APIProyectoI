@@ -28,6 +28,10 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.INTEGER,
             allowNull: false,
             unique: true
+        },
+        password: {
+            type: Sequelize.STRING,
+            allowNull: false
         }
     }, {
         tableName: "maestros",
