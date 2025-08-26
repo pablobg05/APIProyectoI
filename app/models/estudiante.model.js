@@ -5,6 +5,14 @@ module.exports = (sequelize, Sequelize) => {
             primaryKey: true,
             autoIncrement: true
         },
+        id_grado: {
+            type: Sequelize.INTEGER,
+            allowNull: false,
+            references: {
+                model: 'grados',
+                key: 'id_grado'
+            }
+        },
         nombre: {
             type: Sequelize.STRING,
             allowNull: false

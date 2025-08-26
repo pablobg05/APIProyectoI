@@ -77,6 +77,21 @@ exports.findByName = (req, res) => {
         });
 }
 
+exports.findAllByGrado = (req, res) => {
+    const id_grado = req.params.id_grado;
+    Estudiante.findAll({ where: { id_grado: id_grado } })
+        .then(data => {
+        res.send(data);
+        })
+        .catch(err => {
+        res.status(500).send({
+            message: err.message || "Some error occurred while retrieving estudiantes."
+        });
+        });
+}
+
+exports.findAllBy
+
 exports.update = (req, res) => {
     const id = req.params.id;
     Estudiante.update(req.body, {

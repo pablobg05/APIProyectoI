@@ -25,6 +25,8 @@ db.curso = require("./curso.model.js")(sequelize, Sequelize);
 db.estudiante = require("./estudiante.model.js")(sequelize, Sequelize);
 db.maestro = require("./maestro.model.js")(sequelize, Sequelize);
 db.grado = require("./grado.model.js")(sequelize, Sequelize);
+db.admin = require("./admin.model.js")(sequelize, Sequelize);
+db.nota = require("./nota.model.js")(sequelize, Sequelize);
 
 // Relacion maestro-grado 1:1
 db.maestro.hasOne(db.grado, {
@@ -32,9 +34,20 @@ db.maestro.hasOne(db.grado, {
         as: 'grado',
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE' 
-    });
+});
 db.grado.belongsTo(db.maestro, {
         foreignKey: 'id_maestro'
-    });
+});
+
+// Relacion grado-estudiante 1:N
+db.grado.hasMany(db.estudiante, {
+        foreignKey: 'id_grado',
+        as: 'estudiantes',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE' 
+});
+db.estudiante.belongsTo(db.grado, {
+        foreignKey: 'id_grado'
+});
 
 module.exports = db;
