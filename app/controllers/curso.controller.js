@@ -4,7 +4,7 @@ const Sequelize = db.Sequelize;
 const Op = Sequelize.Op;
 
 exports.create = (req, res) => {
-  if (!req.body.nome) {
+  if (!req.body.nombre) {
     res.status(400).send({
       message: "Content cannot be empty!"
     });
@@ -125,5 +125,3 @@ exports.delete = (req, res) => {
       });
     });
 }
-
-module.exports = Curso;

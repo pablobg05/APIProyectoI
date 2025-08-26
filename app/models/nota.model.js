@@ -10,7 +10,10 @@ module.exports = (sequelize, Sequelize) => {
             allowNull: false,
             references: {
                 model: 'cursos',
-                key: 'id_curso'
+                key: 'id_curso',
+
+                onDelete: 'CASCADE',
+                onUpdate: 'CASCADE'
             }
         },
         id_estudiante: {
@@ -18,7 +21,10 @@ module.exports = (sequelize, Sequelize) => {
             allowNull: false,
             references: {
                 model: 'estudiantes',
-                key: 'id_estudiante'
+                key: 'id_estudiante',
+
+                onDelete: 'CASCADE',
+                onUpdate: 'CASCADE'
             }
         },
         modulo: {
@@ -29,10 +35,6 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.FLOAT,
             allowNull: false
         },
-
-        onUpdate: 'CASCADE',
-        onDelete: 'CASCADE'
-
     }, {
         tableName: 'notas',
         timestamps: false

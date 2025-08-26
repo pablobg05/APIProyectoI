@@ -10,7 +10,10 @@ module.exports = (sequelize, Sequelize) => {
             allowNull: false,
             references: {
                 model: 'grados',
-                key: 'id_grado'
+                key: 'id_grado',
+
+                onDelete: 'CASCADE',
+                onUpdate: 'CASCADE'
             }
         },
         nombre: {
