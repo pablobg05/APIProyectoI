@@ -36,7 +36,7 @@ exports.create = (req, res) => {
 
 // Recuperar todos los grados de la base de datos.
 exports.findAll = (req, res) => {
-    Grado.findAll({ include: [{ model: Maestro, as: 'grado' }] })
+    Grado.findAll({ include: [{ model: Maestro, as: 'maestro' }] })
         .then(data => {
             res.send(data);
         })
@@ -52,7 +52,7 @@ exports.findAll = (req, res) => {
 exports.findById = (req, res) => {
     const id = req.params.id;
 
-    Grado.findByPk(id, { include: [{ model: Maestro, as: 'grado' }] })
+    Grado.findByPk(id, { include: [{ model: Maestro, as: 'maestro' }] })
         .then(data => {
             if (data) {
                 res.send(data);

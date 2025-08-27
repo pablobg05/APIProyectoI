@@ -11,10 +11,10 @@ module.exports = (sequelize, Sequelize) => {
             references: {
                 model: 'grados',
                 key: 'id_grado',
+            },
 
-                onDelete: 'CASCADE',
-                onUpdate: 'CASCADE'
-            }
+            onDelete: 'CASCADE',
+            onUpdate: 'CASCADE'
         },
         nombre: {
             type: Sequelize.STRING,
