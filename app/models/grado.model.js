@@ -5,10 +5,6 @@ module.exports = (sequelize, Sequelize) => {
             primaryKey: true,
             autoIncrement: true
         },
-        jornada: {
-            type: Sequelize.STRING,
-            allowNull: false
-        },
         id_maestro: {
             type: Sequelize.INTEGER,
             allowNull: false,

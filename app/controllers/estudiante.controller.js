@@ -90,8 +90,6 @@ exports.findAllByGrado = (req, res) => {
         });
 }
 
-exports.findAllBy
-
 exports.update = (req, res) => {
     const id = req.params.id;
     Estudiante.update(req.body, {
