@@ -3,19 +3,19 @@ module.exports = app => {
     const router = require("express").Router();
 
     // Create a new Admin
-    router.post("/", admins.create);
+    router.post("/create/", admins.create);
 
     // Retrieve all Admins
-    router.get("/", admins.findAll);
+    router.get("/read/", admins.findAll);
 
     // Retrieve a single Admin with id
-    router.get("/:id", admins.findById);
+    router.get("/read/:id", admins.findById);
 
     // Retrieve Admins by name
-    router.get("/name/:nombre", admins.findByName);
+    router.get("/read/name/:nombre", admins.findByName);
 
     // Update an Admin with id
-    router.put("/:id", admins.update);
+    router.put("/update/:id", admins.update);
 
     app.use('/api/admins', router);
 }

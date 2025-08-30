@@ -3,22 +3,22 @@ module.exports = app => {
     var router = require("express").Router();
 
     // Create a new Maestro
-    router.post("/", maestro.create);
+    router.post("/create/", maestro.create);
 
     // Retrieve all Maestros
-    router.get("/", maestro.findAll);
+    router.get("/read/", maestro.findAll);
 
     // Retrieve a single Maestro with name
-    router.get("/nombre/:nombre", maestro.findByName);
+    router.get("/read/nombre/:nombre", maestro.findByName);
 
     // Retrieve a single Maestro with id
-    router.get("/id/:id", maestro.findOne);
+    router.get("/read/id/:id", maestro.findOne);
 
     // Update a Maestro with id
-    router.put("/:id", maestro.update);
+    router.put("/update/:id", maestro.update);
 
     // Delete a Maestro with id
-    router.delete("/:id", maestro.delete);
+    router.delete("/delete/:id", maestro.delete);
 
     app.use('/api/maestros', router);
 };

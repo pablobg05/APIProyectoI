@@ -3,22 +3,22 @@ module.exports = app => {
     var router = require("express").Router();
 
     // Crear un nuevo curso
-    router.post("/", curso.create);
+    router.post("/create/", curso.create);
 
     // Obtener todos los cursos
-    router.get("/", curso.findAll);
+    router.get("/read/", curso.findAll);
 
     // Obtener un curso por id
-    router.get("/id/:id", curso.findById);
+    router.get("/read/id/:id", curso.findById);
 
     // Obtener un curso por nombre
-    router.get("/:nombre", curso.findByName);
+    router.get("/read/:nombre", curso.findByName);
 
     // Actualizar un curso por id
-    router.put("/:id", curso.update);
+    router.put("/update/:id", curso.update);
 
     // Eliminar un curso por id
-    router.delete("/:id", curso.delete);
+    router.delete("/delete/:id", curso.delete);
 
     app.use('/api/cursos', router);
 }
