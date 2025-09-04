@@ -35,7 +35,7 @@ exports.findMaestros = (req, res) => {
     const id = req.params.id_maestro;
     const nombre = req.query.nombre;
     
-    let condition = null;
+    let condition = {};
 
     if (id) {
         Maestro.findByPk(id)
