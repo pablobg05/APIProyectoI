@@ -7,7 +7,7 @@ const Op = db.Sequelize.Op;
 // Crear y guardar un nuevo grado
 exports.create = (req, res) => {
     // Validar solicitud
-    if (!req.body.jornada || !req.body.id_maestro) {
+    if (!req.body.id_maestro) {
         res.status(400).send({
             message: "¡El contenido no puede estar vacío!"
         });
@@ -16,7 +16,6 @@ exports.create = (req, res) => {
 
     // Crear un grado
     const grado = {
-        jornada: req.body.jornada,
         id_maestro: req.body.id_maestro,
         nombre: req.body.nombre
     };
