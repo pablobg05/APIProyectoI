@@ -40,7 +40,7 @@ module.exports = (sequelize, Sequelize) => {
             }
         },
         cui: {
-            type: Sequelize.INTEGER,
+            type: Sequelize.STRING,
             allowNull: true,
             unique: true
         },
