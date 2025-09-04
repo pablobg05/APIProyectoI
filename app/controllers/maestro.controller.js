@@ -38,7 +38,22 @@ exports.findMaestros = (req, res) => {
     let condition = {};
 
     if (id) {
-        condition.id_maestro = id;
+        Maestro.findByPk(id)
+            .then(data => {
+                if (data.length > 0) {
+                    res.send(data);
+                } else {
+                    res.status(404).send({
+                        message: `Cannot find Maestro with id=${id}.`
+                    });
+                }
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message: "Error retrieving Maestro with id=" + id
+                });
+            });
+        return;
     }
 
     if (nombre) {
