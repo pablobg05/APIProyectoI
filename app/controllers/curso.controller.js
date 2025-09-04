@@ -40,7 +40,7 @@ exports.findAll = (req, res) => {
 }
 
 exports.findById = (req, res) => {
-  const id = req.params.id;
+  const id = req.params.id_curso;
     Curso.findByPk(id)
         .then(data => {
         if (data) {
@@ -80,9 +80,9 @@ exports.findByName = (req, res) => {
 }
 
 exports.update = (req, res) => {
-  const id = req.params.id;
+  const id = req.params.id_curso;
     Curso.update(req.body, {
-        where: { id: id }
+        where: { id_curso: id }
     })
         .then(num => {
         if (num == 1) {
@@ -103,10 +103,10 @@ exports.update = (req, res) => {
 }
 
 exports.delete = (req, res) => {
-  const id = req.params.id;
+  const id = req.params.id_curso;
 
   Curso.destroy({
-    where: { id: id }
+    where: { id_curso: id }
   })
     .then(num => {
       if (num == 1) {

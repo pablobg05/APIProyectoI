@@ -56,7 +56,7 @@ exports.findAll = (req, res) => {
 }
 
 exports.findById = (req, res) => {
-    const id = req.params.id;
+    const id = req.params.id_maestro;
 
     Maestro.findByPk(id, {
             include: [{
@@ -109,7 +109,7 @@ exports.findByName = (req, res) => {
 }
 
 exports.update = (req, res) => {
-    const id = req.params.id;
+    const id = req.params.id_maestro;
 
     Maestro.update(req.body, {
             where: {
@@ -135,7 +135,7 @@ exports.update = (req, res) => {
 }
 
 exports.delete = (req, res) => {
-    const id = req.params.id;
+    const id = req.params.id_maestro;
 
     Maestro.destroy({
             where: {

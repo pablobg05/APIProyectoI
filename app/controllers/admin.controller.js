@@ -42,7 +42,7 @@ exports.findAll = (req, res) => {
 }
 
 exports.findById = (req, res) => {
-    const id = req.params.id;
+    const id = req.params.id_admin;
     Admin.findByPk(id)
         .then(data => {
         if (data) {
@@ -74,7 +74,7 @@ exports.findByName = (req, res) => {
 }
 
 exports.update = (req, res) => {
-    const id = req.params.id;
+    const id = req.params.id_admin;
     Admin.update(req.body, {
         where: { id_admin: id }
     })
@@ -97,7 +97,7 @@ exports.update = (req, res) => {
 }
 
 exports.delete = (req, res) => {
-    const id = req.params.id;
+    const id = req.params.id_admin;
     Admin.destroy({
         where: { id_admin: id }
     })

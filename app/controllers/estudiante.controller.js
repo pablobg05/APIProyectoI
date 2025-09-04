@@ -4,7 +4,7 @@ const Sequelize = db.Sequelize;
 const Op = Sequelize.Op;
 
 exports.create = (req, res) => {
-    if (!req.body.nombre || !req.body.cui || !req.body.carnet) {
+    if (!req.body.nombre || !req.body.cui) {
         res.status(400).send({
         message: "Content cannot be empty!"
         });
@@ -46,7 +46,7 @@ exports.findAll = (req, res) => {
 }
 
 exports.findById = (req, res) => {
-    const id = req.params.id;
+    const id = req.params.id_estudiante;
     Estudiante.findByPk(id)
         .then(data => {
         if (data) {
@@ -91,7 +91,7 @@ exports.findAllByGrado = (req, res) => {
 }
 
 exports.update = (req, res) => {
-    const id = req.params.id;
+    const id = req.params.id_estudiante;
     Estudiante.update(req.body, {
         where: { id_estudiante: id }
     })
@@ -114,7 +114,7 @@ exports.update = (req, res) => {
 }
 
 exports.delete = (req, res) => {
-    const id = req.params.id;
+    const id = req.params.id_estudiante;
     Estudiante.destroy({
         where: { id_estudiante: id }
     })

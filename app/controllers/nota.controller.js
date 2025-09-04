@@ -53,7 +53,7 @@ exports.findAll = (req, res) => {
 
 // Encontrar una sola nota con una id_nota
 exports.findOne = (req, res) => {
-    const id = req.params.id;
+    const id = req.params.id_nota;
 
     Nota.findByPk(id)
         .then(data => {
@@ -160,7 +160,7 @@ exports.findByCursoAndModulo = (req, res) => {
 
 // Actualizar una nota por la id_nota en la solicitud
 exports.update = (req, res) => {
-    const id = req.params.id;
+    const id = req.params.id_nota;
 
     Nota.update(req.body, {
         where: { id_nota: id }
@@ -185,7 +185,7 @@ exports.update = (req, res) => {
 
 // Eliminar una nota con la id_nota especificada en la solicitud
 exports.delete = (req, res) => {
-    const id = req.params.id;
+    const id = req.params.id_nota;
 
     Nota.destroy({
         where: { id_nota: id }

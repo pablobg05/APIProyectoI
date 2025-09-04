@@ -50,7 +50,7 @@ exports.findAll = (req, res) => {
 
 // Encontrar un solo grado con una id
 exports.findById = (req, res) => {
-    const id = req.params.id;
+    const id = req.params.id_grado;
 
     Grado.findByPk(id, { include: [{ model: Maestro, as: 'maestro' }] })
         .then(data => {
@@ -71,7 +71,7 @@ exports.findById = (req, res) => {
 
 // Actualizar un grado por la id en la solicitud
 exports.update = (req, res) => {
-    const id = req.params.id;
+    const id = req.params.id_grado;
 
     Grado.update(req.body, {
         where: { id_grado: id }
@@ -96,7 +96,7 @@ exports.update = (req, res) => {
 
 // Eliminar un grado con la id especificada en la solicitud
 exports.delete = (req, res) => {
-    const id = req.params.id;
+    const id = req.params.id_grado;
 
     Grado.destroy({
         where: { id_grado: id }
