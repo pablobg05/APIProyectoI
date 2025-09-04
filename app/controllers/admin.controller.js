@@ -40,7 +40,7 @@ exports.findAdmins = (req, res) => {
         // Si hay id, buscamos por PK
         Admin.findByPk(id)
             .then(data => {
-                if (data) {
+                if (data.length > 0) {
                     res.send(data);
                 } else {
                     res.status(404).send({ message: `Cannot find Admin with id=${id}.` });

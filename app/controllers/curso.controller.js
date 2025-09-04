@@ -36,7 +36,7 @@ exports.findCursos = (req, res) => {
   if (id) {
     Curso.findByPk(id)
       .then(data => {
-        if (data) {
+        if (data.length > 0) {
           res.send(data);
         } else {
           res.status(404).send({

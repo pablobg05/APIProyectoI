@@ -41,7 +41,7 @@ exports.findGrados = (req, res) => {
 
     Grado.findAll({ where: condition })
         .then(data => {
-            if (datalength > 0) {
+            if (data.length > 0) {
                 res.send(data);
             } else {
                 res.status(404).send({
