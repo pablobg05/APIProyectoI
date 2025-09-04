@@ -34,7 +34,7 @@ exports.create = (req, res) => {
 exports.findMaestros = (req, res) => {
     const id = req.params.id_maestro;
     const nombre = req.query.nombre;
-    
+
     let condition = {};
 
     if (id) {
@@ -47,7 +47,7 @@ exports.findMaestros = (req, res) => {
 
     Maestro.findAll({ where: condition })
         .then(data => {
-            if (datalength > 0) {
+            if (data.length > 0) {
                 res.send(data);
             } else {
                 res.status(404).send({
@@ -60,7 +60,7 @@ exports.findMaestros = (req, res) => {
                 message: err.message || "Some error occurred while retrieving maestros."
             });
         });
-}
+};
 
 exports.update = (req, res) => {
     const id = req.params.id_maestro;
