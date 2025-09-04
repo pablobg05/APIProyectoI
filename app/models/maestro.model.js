@@ -25,7 +25,7 @@ module.exports = (sequelize, Sequelize) => {
             }
         },
         dpi: {
-            type: Sequelize.INTEGER,
+            type: Sequelize.STRING,
             allowNull: false,
             unique: true
         },
