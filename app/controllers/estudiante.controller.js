@@ -12,6 +12,7 @@ exports.create = (req, res) => {
     }
     
     const estudiante = {
+        id_grado: req.body.id_grado,
         nombre: req.body.nombre,
         encargado: req.body.encargado,
         telefono: req.body.telefono,
