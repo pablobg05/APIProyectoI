@@ -5,14 +5,8 @@ module.exports = app => {
     // Crear un nuevo curso
     router.post("/create", curso.create);
 
-    // Obtener todos los cursos
-    router.get("/read", curso.findAll);
-
-    // Obtener un curso por id
-    router.get("/read/id/:id_curso", curso.findById);
-
-    // Obtener un curso por nombre
-    router.get("/read/:nombre", curso.findByName);
+    // Obtener cursos o un curso por id o nombre
+    router.get("/read", curso.findCursos);
 
     // Actualizar un curso por id
     router.put("/update/:id_curso", curso.update);

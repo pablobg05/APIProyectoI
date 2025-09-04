@@ -6,17 +6,8 @@ module.exports = app => {
     // Crear un nuevo estudiante
     router.post("/create", estudiante.create);
 
-    // Obtener todos los estudiantes
-    router.get("/read", estudiante.findAll);
-
-    // Obtener todos los estudiantes por grado
-    router.get("/read/grado/:id_grado", estudiante.findAllByGrado);
-
-    // Obtener un estudiante por nombre
-    router.get("/read/nombre/:nombre", estudiante.findByName);
-
-    // Obtener un estudiante por id
-    router.get("/read/id/:id_estudiante", estudiante.findById);
+    // Obtener estudiantes o un estudiante por id, nombre o grado
+    router.get("/read", estudiante.findEstudiantes);
 
     // Actualizar un estudiante por id
     router.put("/update/:id_estudiante", estudiante.update);

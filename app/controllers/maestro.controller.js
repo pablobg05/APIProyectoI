@@ -30,80 +30,48 @@ exports.create = (req, res) => {
         });
 }
 
-exports.findAll = (req, res) => {
+exports.findMaestros = (req, res) => {
+    const id = req.params.id_maestro;
     const nombre = req.query.nombre;
-    var condition = nombre ? {
-        nombre: {
-            [Op.like]: `%${nombre}%`
-        }
-    } : null;
+    
+    let condition = null;
 
-    Maestro.findAll({
-            where: condition,
-            include: [{
-                model: db.grado,
-                as: 'grado'
-            }]
-        })
+    if (id) {
+        Maestro.findByPk(id)
+            .then(data => {
+                if (data) {
+                    res.send(data);
+                } else {
+                    res.status(404).send({
+                        message: `Cannot find Maestro with id=${id}.`
+                    });
+                }
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message: "Error retrieving Maestro with id=" + id
+                });
+            });
+            return;
+    }
+
+    if (nombre) {
+        condition = { nombre: { [Op.like]: `%${nombre}%` } };
+    }
+
+    Maestro.findAll({ where: condition })
         .then(data => {
-            res.send(data);
+            if (data > 0) {
+                res.send(data);
+            } else {
+                res.status(404).send({
+                    message: "No maestros found."
+                });
+            }
         })
         .catch(err => {
             res.status(500).send({
                 message: err.message || "Some error occurred while retrieving maestros."
-            });
-        });
-}
-
-exports.findById = (req, res) => {
-    const id = req.params.id_maestro;
-
-    Maestro.findByPk(id, {
-            include: [{
-                model: db.grado,
-                as: 'grado'
-            }]
-        })
-        .then(data => {
-            if (data) {
-                res.send(data);
-            } else {
-                res.status(404).send({
-                    message: `Cannot find Maestro with id=${id}.`
-                });
-            }
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Error retrieving Maestro with id=" + id
-            });
-        });
-}
-
-exports.findByName = (req, res) => {
-    const nombre = req.params.nombre;
-
-    Maestro.findOne({
-            where: {
-                nombre: nombre
-            },
-            include: [{
-                model: db.grado,
-                as: 'grado'
-            }]
-        })
-        .then(data => {
-            if (data) {
-                res.send(data);
-            } else {
-                res.status(404).send({
-                    message: `Cannot find Maestro with nombre=${nombre}.`
-                });
-            }
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Error retrieving Maestro with nombre=" + nombre
             });
         });
 }

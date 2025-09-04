@@ -5,7 +5,7 @@ module.exports = app => {
     // Create a new Admin
     router.post("/create", admins.create);
 
-    // Retrieve Admins (all or by filters) [los filtros se ponen con ?, por ejemplo ?id_admin=3 o ?nombre=Juan]
+    // Retrieve Admins (all or by filters) [los filtros se ponen con ?, por ejemplo ?id_admin=3 o ?nombre=Juan, y no hay que usar comillas]
     router.get("/read", admins.findAdmins);
 
     // Update an Admin with id

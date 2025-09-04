@@ -27,57 +27,40 @@ exports.create = (req, res) => {
     });
 }
 
-exports.findAll = (req, res) => {
-  Curso.findAll()
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message: err.message || "Some error occurred while retrieving cursos."
-      });
-    });
-}
+exports.findCursos = (req, res) => {
+  const id = req.query.id_curso;
+  const nombre = req.query.nombre;
 
-exports.findById = (req, res) => {
-  const id = req.params.id_curso;
+  let condition = null;
+
+  if (id) {
     Curso.findByPk(id)
-        .then(data => {
+      .then(data => {
         if (data) {
-            res.send(data);
+          res.send(data);
         } else {
-            res.status(404).send({
+          res.status(404).send({
             message: `Cannot find Curso with id=${id}.`
-            });
+          });
         }
-        })
-        .catch(err => {
-        res.status(500).send({
-            message: err.message || "Error retrieving Curso with id=" + id
-        });
-        });
+      })
+      .catch(err => res.status(500).send({
+          message: "Error retrieving Curso with id=" + id
+        }));
+        return;
+  } 
+  
+  if (nombre) {
+    condition = { nombre: { [Op.like]: `%${nombre}%` } };
+  }
+
+  Curso.findAll({ where: condition })
+    .then(data => res.send(data))
+    .catch(err => res.status(500).send({
+        message: err.message || "Some error occurred while retrieving cursos."
+      }));
 }
 
-exports.findByName = (req, res) => {
-  const nombre = req.params.nombre;
-    Curso.findOne({
-        where: { nombre: nombre }
-    })
-        .then(data => {
-        if (data) {
-            res.send(data);
-        } else {
-            res.status(404).send({
-            message: `Cannot find Curso with name=${nombre}.`
-            });
-        }
-        })
-        .catch(err => {
-        res.status(500).send({
-            message: err.message || "Error retrieving Curso with name=" + nombre
-        });
-        });
-}
 
 exports.update = (req, res) => {
   const id = req.params.id_curso;

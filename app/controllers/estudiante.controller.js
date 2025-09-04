@@ -33,60 +33,55 @@ exports.create = (req, res) => {
         });
     }
 
-exports.findAll = (req, res) => {
-    Estudiante.findAll()
-        .then(data => {
-        res.send(data);
-        })
-        .catch(err => {
-        res.status(500).send({
-            message: err.message || "Some error occurred while retrieving estudiantes."
-        });
-        });
-}
-
-exports.findById = (req, res) => {
+exports.findEstudiantes = (req, res) => {
     const id = req.params.id_estudiante;
-    Estudiante.findByPk(id)
+    const nombre = req.query.nombre;
+    const grado = req.query.grado;
+
+    let condition = {};
+
+    if (id) {
+        Estudiante.findByPk(id)
         .then(data => {
-        if (data) {
-            res.send(data);
-        } else {
-            res.status(404).send({
-            message: `Cannot find Estudiante with id=${id}.`
+            if (data) {
+                res.send(data);
+            } else {
+                res.status(404).send({
+                    message: `Cannot find Estudiante with id=${id}.`
+                });
+            }
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Error retrieving Estudiante with id=" + id
             });
+        });
+        return;
+    }
+
+    if (nombre) {
+        condition.nombre = { [Op.like]: `%${nombre}%` };
+    }
+
+    if (grado) {
+        condition.grado = { [Op.like]: `%${grado}%` };
+    }
+
+    Estudiante.findAll({ where: condition })
+        .then(data => {
+            if (data.length > 0) {
+                res.send(data);
+            } else {
+                res.status(404).send({
+                    message: "No students found matching the criteria."
+                });
+            }
         }
-        })
+        )
         .catch(err => {
-        res.status(500).send({
-            message: err.message || "Error retrieving Estudiante with id=" + id
-        });
-        });
-}
-
-exports.findByName = (req, res) => {
-    const nombre = req.params.nombre;
-    Estudiante.findAll({ where: { nombre: { [Op.like]: `%${nombre}%` } } })
-        .then(data => {
-        res.send(data);
-        })
-        .catch(err => {
-        res.status(500).send({
-            message: err.message || "Some error occurred while retrieving estudiantes."
-        });
-        });
-}
-
-exports.findAllByGrado = (req, res) => {
-    const id_grado = req.params.id_grado;
-    Estudiante.findAll({ where: { id_grado: id_grado } })
-        .then(data => {
-        res.send(data);
-        })
-        .catch(err => {
-        res.status(500).send({
-            message: err.message || "Some error occurred while retrieving estudiantes."
-        });
+            res.status(500).send({
+                message: err.message || "Some error occurred while retrieving students."
+            });
         });
 }
 

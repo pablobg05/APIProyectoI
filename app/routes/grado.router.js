@@ -6,11 +6,8 @@ module.exports = app => {
     // Crear un nuevo grado
     router.post("/create", grado.create);
 
-    // Obtener todos los grados
-    router.get("/read", grado.findAll);
-
-    // Obtener un grado por id
-    router.get("/read/:id_grado", grado.findById);
+    // Obtener grados o un grado por id
+    router.get("/read", grado.findGrados);
 
     // Actualizar un grado por id
     router.put("/update/:id_grado", grado.update);

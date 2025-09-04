@@ -35,125 +35,57 @@ exports.create = (req, res) => {
 }
 
 // Recuperar todas las notas de la base de datos.
-exports.findAll = (req, res) => {
+exports.findNotas = (req, res) => {
+    const id = req.params.id_nota;
+    const modulo = req.query.modulo;
     const id_curso = req.query.id_curso;
-    var condition = id_curso ? { id_curso: { [Op.eq]: `${id_curso}` } } : null;
+    const id_estudiante = req.query.id_estudiante;
+
+    let condition = {};
+
+    if (id) {
+        Nota.findByPk(id)
+            .then(data => {
+                if (data > 0) {
+                    res.send(data);
+                } else {
+                    res.status(404).send({
+                        message: `No se puede encontrar la nota con id=${id}.`
+                    });
+                }
+            })
+            .catch(err => {
+                res.status(500).send({
+                    message: "Error al recuperar la nota con id=" + id
+                });
+            });
+        return;
+    }
+
+    if (modulo) {
+        condition.modulo = { [Op.like]: `%${modulo}%` };
+    }
+    if (id_curso) {
+        condition.id_curso = id_curso;
+    }
+    if (id_estudiante) {
+        condition.id_estudiante = id_estudiante;
+    }
 
     Nota.findAll({ where: condition })
         .then(data => {
-            res.send(data);
+            if (data > 0) {
+                res.send(data);
+            } else {
+                res.status(404).send({
+                    message: "No se encontraron notas."
+                });
+            }
         })
         .catch(err => {
             res.status(500).send({
                 message:
                     err.message || "Ocurrió un error al recuperar las notas."
-            });
-        });
-}
-
-// Encontrar una sola nota con una id_nota
-exports.findOne = (req, res) => {
-    const id = req.params.id_nota;
-
-    Nota.findByPk(id)
-        .then(data => {
-            if (data) {
-                res.send(data);
-            } else {
-                res.status(404).send({
-                    message: `No se puede encontrar la nota con id=${id}.`
-                });
-            }
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Error al recuperar la nota con id=" + id
-            });
-        });
-}
-
-//Encontrar todas las notas de un curso por la id_estudiante
-exports.findByEstudiante = (req, res) => {
-    const id_estudiante = req.params.id_estudiante;
-
-    Nota.findAll({ where: { id_estudiante: { [Op.eq]: `${id_estudiante}` } } })
-        .then(data => {
-            if (data) {
-                res.send(data);
-            } else {
-                res.status(404).send({
-                    message: `No se pueden encontrar notas para el estudiante con id=${id_estudiante}.`
-                });
-            }
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Error al recuperar las notas para el estudiante con id=" + id_estudiante
-            });
-        });
-}
-
-// Encontrar todas las notas de un estudiante por la id_estudiante y modulo
-exports.findByEstudianteAndModulo = (req, res) => {
-    const id_estudiante = req.params.id_estudiante;
-    const modulo = req.params.modulo;
-
-    Nota.findAll({ where: { id_estudiante: { [Op.eq]: `${id_estudiante}` }, modulo: { [Op.eq]: `${modulo}` } } })
-        .then(data => {
-            if (data) {
-                res.send(data);
-            } else {
-                res.status(404).send({
-                    message: `No se pueden encontrar notas para el estudiante con id=${id_estudiante} en el módulo ${modulo}.`
-                });
-            }
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Error al recuperar las notas para el estudiante con id=" + id_estudiante + " en el módulo " + modulo
-            });
-        });
-}
-
-// Encontrar todas las notas de un curso por la id_curso
-exports.findByCurso = (req, res) => {
-    const id_curso = req.params.id_curso;
-
-    Nota.findAll({ where: { id_curso: { [Op.eq]: `${id_curso}` } } })
-        .then(data => {
-            if (data) {
-                res.send(data);
-            } else {
-                res.status(404).send({
-                    message: `No se pueden encontrar notas para el curso con id=${id_curso}.`
-                });
-            }
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Error al recuperar las notas para el curso con id=" + id_curso
-            });
-        });
-}
-
-// Encontrar todas las notas de un curso por la id_curso y modulo
-exports.findByCursoAndModulo = (req, res) => {
-    const id_curso = req.params.id_curso;
-    const modulo = req.params.modulo;
-
-    Nota.findAll({ where: { id_curso: { [Op.eq]: `${id_curso}` }, modulo: { [Op.eq]: `${modulo}` } } })
-        .then(data => {
-            if (data) {
-                res.send(data);
-            } else {
-                res.status(404).send({
-                    message: `No se pueden encontrar notas para el curso con id=${id_curso} en el módulo ${modulo}.`
-                });
-            }
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Error al recuperar las notas para el curso con id=" + id_curso + " en el módulo " + modulo
             });
         });
 }

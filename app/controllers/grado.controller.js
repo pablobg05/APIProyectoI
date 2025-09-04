@@ -34,36 +34,28 @@ exports.create = (req, res) => {
 }
 
 // Recuperar todos los grados de la base de datos.
-exports.findAll = (req, res) => {
-    Grado.findAll({ include: [{ model: Maestro, as: 'maestro' }] })
+exports.findGrados = (req, res) => {
+    const id = req.params.id_grado;
+
+    let condition = id ? { id_grado: id } : null;
+
+    Grado.findAll({ where: condition })
         .then(data => {
-            res.send(data);
-        })
+            if (datalength > 0) {
+                res.send(data);
+            } else {
+                res.status(404).send({
+                    message: id
+                        ? `No se puede encontrar el grado con id=${id}.`
+                        : "¡No se encontraron grados!"
+                });
+            }
+        }
+        )
         .catch(err => {
             res.status(500).send({
                 message:
                     err.message || "¡Ocurrió un error al recuperar los grados!"
-            });
-        });
-}
-
-// Encontrar un solo grado con una id
-exports.findById = (req, res) => {
-    const id = req.params.id_grado;
-
-    Grado.findByPk(id, { include: [{ model: Maestro, as: 'maestro' }] })
-        .then(data => {
-            if (data) {
-                res.send(data);
-            } else {
-                res.status(404).send({
-                    message: `No se puede encontrar el grado con id=${id}.`
-                });
-            }
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Error al recuperar el grado con id=" + id
             });
         });
 }
