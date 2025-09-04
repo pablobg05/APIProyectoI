@@ -35,7 +35,7 @@ exports.create = (req, res) => {
 
 // Recuperar todos los grados de la base de datos.
 exports.findGrados = (req, res) => {
-    const id = req.params.id_grado;
+    const id = req.query.id_grado;
 
     let condition = id ? { id_grado: id } : null;
 

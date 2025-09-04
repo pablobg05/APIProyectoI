@@ -34,7 +34,7 @@ exports.create = (req, res) => {
     }
 
 exports.findEstudiantes = (req, res) => {
-    const id = req.params.id_estudiante;
+    const id = req.query.id_estudiante;
     const nombre = req.query.nombre;
     const grado = req.query.grado;
 

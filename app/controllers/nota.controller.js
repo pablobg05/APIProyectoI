@@ -36,7 +36,7 @@ exports.create = (req, res) => {
 
 // Recuperar todas las notas de la base de datos.
 exports.findNotas = (req, res) => {
-    const id = req.params.id_nota;
+    const id = req.query.id_nota;
     const modulo = req.query.modulo;
     const id_curso = req.query.id_curso;
     const id_estudiante = req.query.id_estudiante;

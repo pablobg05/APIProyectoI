@@ -32,7 +32,7 @@ exports.create = (req, res) => {
 }
 
 exports.findMaestros = (req, res) => {
-    const id = req.params.id_maestro;
+    const id = req.query.id_maestro;
     const nombre = req.query.nombre;
 
     let condition = {};
