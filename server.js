@@ -4,10 +4,17 @@ const cors = require('cors');
 const app = express();
 
 var corsOptions = {
-    origin: [
-            "http://localhost:8081",
-            "https://apirest2025-1-xdab.onrender.com"
-    ]
+  origin: function (origin, callback) {
+    const allowedOrigins = [
+      "http://localhost:8081",
+      "https://apirest2025-1-xdab.onrender.com"
+    ];
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not allowed by CORS"));
+    }
+  }
 };
 
 app.use(cors(corsOptions));
