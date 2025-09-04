@@ -3,7 +3,7 @@ module.exports = app => {
     var router = require("express").Router();
 
     // Crear una nueva nota
-    router.post("/create/", notas.create);
+    router.post("/create", notas.create);
 
     // Encontrar todas las notas de un estudiante por la id_estudiante
     router.get("/read/estudiante/:id_estudiante", notas.findByEstudiante);

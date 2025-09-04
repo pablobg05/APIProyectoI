@@ -3,10 +3,10 @@ module.exports = app => {
     var router = require("express").Router();
 
     // Crear un nuevo curso
-    router.post("/create/", curso.create);
+    router.post("/create", curso.create);
 
     // Obtener todos los cursos
-    router.get("/read/", curso.findAll);
+    router.get("/read", curso.findAll);
 
     // Obtener un curso por id
     router.get("/read/id/:id", curso.findById);

@@ -4,10 +4,10 @@ module.exports = app => {
     var router = require("express").Router();
 
     // Crear un nuevo estudiante
-    router.post("/create/", estudiante.create);
+    router.post("/create", estudiante.create);
 
     // Obtener todos los estudiantes
-    router.get("/read/", estudiante.findAll);
+    router.get("/read", estudiante.findAll);
 
     // Obtener todos los estudiantes por grado
     router.get("/read/grado/:id_grado", estudiante.findAllByGrado);

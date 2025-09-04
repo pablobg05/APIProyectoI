@@ -4,10 +4,10 @@ module.exports = app => {
     var router = require("express").Router();
 
     // Crear un nuevo grado
-    router.post("/create/", grado.create);
+    router.post("/create", grado.create);
 
     // Obtener todos los grados
-    router.get("/read/", grado.findAll);
+    router.get("/read", grado.findAll);
 
     // Obtener un grado por id
     router.get("/read/:id", grado.findById);

@@ -3,10 +3,10 @@ module.exports = app => {
     var router = require("express").Router();
 
     // Create a new Maestro
-    router.post("/create/", maestro.create);
+    router.post("/create", maestro.create);
 
     // Retrieve all Maestros
-    router.get("/read/", maestro.findAll);
+    router.get("/read", maestro.findAll);
 
     // Retrieve a single Maestro with name
     router.get("/read/nombre/:nombre", maestro.findByName);
