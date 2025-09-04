@@ -41,22 +41,7 @@ exports.findEstudiantes = (req, res) => {
     let condition = {};
 
     if (id) {
-        Estudiante.findByPk(id)
-        .then(data => {
-            if (data.length > 0) {
-                res.send(data);
-            } else {
-                res.status(404).send({
-                    message: `Cannot find Estudiante with id=${id}.`
-                });
-            }
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Error retrieving Estudiante with id=" + id
-            });
-        });
-        return;
+        condition.id_estudiante = id;
     }
 
     if (nombre) {
