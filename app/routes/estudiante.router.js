@@ -16,13 +16,13 @@ module.exports = app => {
     router.get("/read/nombre/:nombre", estudiante.findByName);
 
     // Obtener un estudiante por id
-    router.get("/read/id/:id", estudiante.findById);
+    router.get("/read/id/:id_estudiante", estudiante.findById);
 
     // Actualizar un estudiante por id
-    router.put("/update/:id", estudiante.update);
+    router.put("/update/:id_estudiante", estudiante.update);
 
     // Eliminar un estudiante por id
-    router.delete("/delete/:id", estudiante.delete);
+    router.delete("/delete/:id_estudiante", estudiante.delete);
 
     app.use('/api/estudiantes', router);
 }

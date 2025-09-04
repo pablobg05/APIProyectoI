@@ -9,16 +9,16 @@ module.exports = app => {
     router.get("/read", curso.findAll);
 
     // Obtener un curso por id
-    router.get("/read/id/:id", curso.findById);
+    router.get("/read/id/:id_curso", curso.findById);
 
     // Obtener un curso por nombre
     router.get("/read/:nombre", curso.findByName);
 
     // Actualizar un curso por id
-    router.put("/update/:id", curso.update);
+    router.put("/update/:id_curso", curso.update);
 
     // Eliminar un curso por id
-    router.delete("/delete/:id", curso.delete);
+    router.delete("/delete/:id_curso", curso.delete);
 
     app.use('/api/cursos', router);
 }

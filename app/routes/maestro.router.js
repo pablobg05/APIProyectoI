@@ -12,13 +12,13 @@ module.exports = app => {
     router.get("/read/nombre/:nombre", maestro.findByName);
 
     // Retrieve a single Maestro with id
-    router.get("/read/id/:id", maestro.findById);
+    router.get("/read/id/:id_maestro", maestro.findById);
 
     // Update a Maestro with id
-    router.put("/update/:id", maestro.update);
+    router.put("/update/:id_maestro", maestro.update);
 
     // Delete a Maestro with id
-    router.delete("/delete/:id", maestro.delete);
+    router.delete("/delete/:id_maestro", maestro.delete);
 
     app.use('/api/maestros', router);
 };

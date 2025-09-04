@@ -9,13 +9,13 @@ module.exports = app => {
     router.get("/read", admins.findAll);
 
     // Retrieve a single Admin with id
-    router.get("/read/:id", admins.findById);
+    router.get("/read/:id_admin", admins.findById);
 
     // Retrieve Admins by name
     router.get("/read/name/:nombre", admins.findByName);
 
     // Update an Admin with id
-    router.put("/update/:id", admins.update);
+    router.put("/update/:id_admin", admins.update);
 
     app.use('/api/admins', router);
 }
