@@ -29,49 +29,40 @@ exports.create = (req, res) => {
         });
 }
 
-exports.findAll = (req, res) => {
-    Admin.findAll()
-        .then(data => {
-        res.send(data);
-        })
-        .catch(err => {
-        res.status(500).send({
-            message: err.message || "Some error occurred while retrieving admins."
-        });
-        });
-}
+exports.findAdmins = (req, res) => {
+    const id = req.query.id_admin;      // buscar por ID si se pasa
+    const nombre = req.query.nombre;    // buscar por nombre si se pasa
 
-exports.findById = (req, res) => {
-    const id = req.params.id_admin;
-    Admin.findByPk(id)
-        .then(data => {
-        if (data) {
-            res.send(data);
-        } else {
-            res.status(404).send({
-            message: `Cannot find Admin with id=${id}.`
-            });
-        }
-        })
-        .catch(err => {
-        res.status(500).send({
-            message: err.message || "Some error occurred while retrieving the Admin."
-        });
-        });
-}
+    // Construir condición según los filtros
+    let condition = null;
 
-exports.findByName = (req, res) => {
-    const nombre = req.params.nombre;
-    Admin.findAll({ where: { nombre: { [Op.like]: `%${nombre}%` } } })
-        .then(data => {
-        res.send(data);
-        })
-        .catch(err => {
-        res.status(500).send({
+    if (id) {
+        // Si hay id, buscamos por PK
+        Admin.findByPk(id)
+            .then(data => {
+                if (data) {
+                    res.send(data);
+                } else {
+                    res.status(404).send({ message: `Cannot find Admin with id=${id}.` });
+                }
+            })
+            .catch(err => res.status(500).send({
+                message: err.message || "Some error occurred while retrieving the Admin."
+            }));
+        return; // salimos aquí porque no necesitamos buscar todos
+    }
+
+    if (nombre) {
+        condition = { nombre: { [Op.like]: `%${nombre}%` } };
+    }
+
+    // Buscar todos o por nombre
+    Admin.findAll({ where: condition })
+        .then(data => res.send(data))
+        .catch(err => res.status(500).send({
             message: err.message || "Some error occurred while retrieving admins."
-        });
-        });
-}
+        }));
+};
 
 exports.update = (req, res) => {
     const id = req.params.id_admin;
