@@ -20,6 +20,11 @@ app.get("/", (req, res) => {
 });
 
 require("./app/routes/curso.router.js")(app);
+require("./app/routes/estudiante.router.js")(app);
+require("./app/routes/maestro.router.js")(app);
+require("./app/routes/grado.router.js")(app);
+require("./app/routes/nota.router.js")(app);
+require("./app/routes/admin.router.js")(app);
 
 const PORT = process.env.PORT || 8081;
 app.listen(PORT, () => {

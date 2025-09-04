@@ -12,7 +12,7 @@ module.exports = app => {
     router.get("/read/nombre/:nombre", maestro.findByName);
 
     // Retrieve a single Maestro with id
-    router.get("/read/id/:id", maestro.findOne);
+    router.get("/read/id/:id", maestro.findById);
 
     // Update a Maestro with id
     router.put("/update/:id", maestro.update);
