@@ -16,7 +16,8 @@ exports.create = (req, res) => {
         telefono: req.body.telefono,
         direccion: req.body.direccion,
         email: req.body.email,
-        dpi: req.body.dpi
+        dpi: req.body.dpi,
+        password: req.body.password
     };
 
     Maestro.create(maestro)
