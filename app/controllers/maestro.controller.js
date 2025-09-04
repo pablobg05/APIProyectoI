@@ -47,7 +47,7 @@ exports.findMaestros = (req, res) => {
 
     Maestro.findAll({ where: condition })
         .then(data => {
-            if (datalenght > 0) {
+            if (datalength > 0) {
                 res.send(data);
             } else {
                 res.status(404).send({
