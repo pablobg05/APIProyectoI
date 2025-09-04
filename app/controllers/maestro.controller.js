@@ -38,31 +38,16 @@ exports.findMaestros = (req, res) => {
     let condition = {};
 
     if (id) {
-        Maestro.findByPk(id)
-            .then(data => {
-                if (data) {
-                    res.send(data);
-                } else {
-                    res.status(404).send({
-                        message: `Cannot find Maestro with id=${id}.`
-                    });
-                }
-            })
-            .catch(err => {
-                res.status(500).send({
-                    message: "Error retrieving Maestro with id=" + id
-                });
-            });
-            return;
+        condition.id_maestro = id;
     }
 
     if (nombre) {
-        condition = { nombre: { [Op.like]: `%${nombre}%` } };
+        condition.nombre = { [Op.like]: `%${nombre}%` };
     }
 
     Maestro.findAll({ where: condition })
         .then(data => {
-            if (data > 0) {
+            if (datalenght > 0) {
                 res.send(data);
             } else {
                 res.status(404).send({
