@@ -8,7 +8,6 @@ module.exports = (sequelize, Sequelize) => {
         id_maestro: {
             type: Sequelize.INTEGER,
             allowNull: false,
-            unique: true,
             references: {
                 model: 'maestros',
                 key: 'id_maestro',

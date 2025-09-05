@@ -37,7 +37,7 @@ exports.create = (req, res) => {
 exports.findEstudiantes = (req, res) => {
     const id = req.query.id_estudiante;
     const nombre = req.query.nombre;
-    const grado = req.query.grado;
+    const grado = req.query.id_grado;
 
     let condition = {};
 
@@ -50,7 +50,7 @@ exports.findEstudiantes = (req, res) => {
     }
 
     if (grado) {
-        condition.grado = { [Op.like]: `%${grado}%` };
+        condition.id_grado = { [Op.like]: `%${grado}%` };
     }
 
     Estudiante.findAll({ where: condition })
