@@ -40,7 +40,7 @@ exports.findMaestros = (req, res) => {
     if (id) {
         Maestro.findByPk(id)
             .then(data => {
-                if (data.length > 0) {
+                if (data) {
                     res.send(data);
                 } else {
                     res.status(404).send({
