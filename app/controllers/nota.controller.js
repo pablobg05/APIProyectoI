@@ -46,7 +46,7 @@ exports.findNotas = (req, res) => {
     if (id) {
         Nota.findByPk(id)
             .then(data => {
-                if (data.length > 0) {
+                if (data) {
                     res.send(data);
                 } else {
                     res.status(404).send({
