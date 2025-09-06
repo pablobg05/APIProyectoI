@@ -50,7 +50,7 @@ exports.findEstudiantes = (req, res) => {
     }
 
     if (grado) {
-        condition.id_grado = { [Op.like]: `%${grado}%` };
+        condition.id_grado = grado;
     }
 
     Estudiante.findAll({ where: condition })

@@ -28,15 +28,15 @@ db.grado = require("./grado.model.js")(sequelize, Sequelize);
 db.admin = require("./admin.model.js")(sequelize, Sequelize);
 db.nota = require("./nota.model.js")(sequelize, Sequelize);
 
-// Relacion maestro-grado 1:1
-db.maestro.hasOne(db.grado, {
-        foreignKey: 'id_maestro',
-        as: 'grado',
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE' 
+// Relacion maestro-grado 1:N (un maestro puede tener varios grados)
+db.maestro.hasMany(db.grado, {
+    foreignKey: 'id_maestro',
+    as: 'grados',
+    onDelete: 'SET NULL',
+    onUpdate: 'CASCADE'
 });
 db.grado.belongsTo(db.maestro, {
-        foreignKey: 'id_maestro'
+    foreignKey: 'id_maestro'
 });
 
 // Relacion grado-estudiante 1:N

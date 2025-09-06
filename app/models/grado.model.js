@@ -7,13 +7,12 @@ module.exports = (sequelize, Sequelize) => {
         },
         id_maestro: {
             type: Sequelize.INTEGER,
-            allowNull: false,
+            allowNull: true,
             references: {
                 model: 'maestros',
                 key: 'id_maestro',
             },
-
-            onDelete: 'CASCADE',
+            onDelete: 'SET NULL',
             onUpdate: 'CASCADE'
         },
         nombre: {
