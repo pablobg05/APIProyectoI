@@ -74,7 +74,7 @@ exports.findNotas = (req, res) => {
 
     Nota.findAll({ where: condition })
         .then(data => {
-            if (data > 0) {
+            if (data.length > 0) {
                 res.send(data);
             } else {
                 res.status(404).send({
